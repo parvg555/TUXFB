@@ -156,5 +156,43 @@ public class UserService {
         }
     }
 
+    public FollowersFollowingVO searchFollowersAndFollowing(Integer userId, String query){
+        try{
+            FollowersFollowingVO followersFollowingVO = new FollowersFollowingVO();
+            List<Integer> followers = followsRepository.getFollowers(userId);
+            List<User> followersAsUser = new ArrayList<>();
+            for(Integer followerId:followers){
+                User followerUser = userRepository.getById((long) followerId);
+                Boolean matchesQuery =
+                        followerUser.getFirstName().contains(query) ||
+                        followerUser.getLastName().contains(query) ||
+                        followerUser.getUsername().contains(query);
+                if(followerUser!=null && matchesQuery){
+                    followersAsUser.add(followerUser);
+                }
+            }
+
+            List<Integer> following = followsRepository.getFollowing(userId);
+            List<User> followingAsUser = new ArrayList<>();
+            for(Integer followerId:following){
+                User followerUser = userRepository.getById((long) followerId);
+                Boolean matchesQuery =
+                        followerUser.getFirstName().contains(query) ||
+                                followerUser.getLastName().contains(query) ||
+                                followerUser.getUsername().contains(query);
+                if(followerUser!=null && matchesQuery){
+                    followingAsUser.add(followerUser);
+                }
+            }
+
+            followersFollowingVO.setFollowers(followersAsUser);
+            followersFollowingVO.setFollowing(followingAsUser);
+            return followersFollowingVO;
+        }catch(Exception e){
+            System.out.println(e);
+            throw e;
+        }
+    }
+
 
 }

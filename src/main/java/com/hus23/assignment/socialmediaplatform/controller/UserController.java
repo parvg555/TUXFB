@@ -118,4 +118,15 @@ public class UserController {
         }
     }
 
+    @GetMapping("/searchFollowersAndFollowing/{userId}")
+    public ResponseEntity<?> searchFollowersAndFollowing(@PathVariable("userId") Integer userId, @RequestBody String query){
+        try{
+            FollowersFollowingVO followersFollowingVO = userService.searchFollowersAndFollowing(userId,query);
+            return new ResponseEntity<>(followersFollowingVO, HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>("Bad request!", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+
 }
