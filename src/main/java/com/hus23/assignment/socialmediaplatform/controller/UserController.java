@@ -69,4 +69,14 @@ public class UserController {
         return new ResponseEntity<>(details, HttpStatus.OK);
     }
 
+    @GetMapping("/getUsers")
+    public ResponseEntity<?> getUsers(@RequestBody String query){
+        try{
+            List<User> searchResults= userService.getUsers(query);
+            return new ResponseEntity<>(searchResults, HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<>("Bad request!", HttpStatus.BAD_REQUEST);
+        }
+    }
+
 }

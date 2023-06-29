@@ -5,7 +5,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 //import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
@@ -32,4 +35,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
             " password = :newPassword \n" +
             " where id = :userId ;")
     void updatePassword(String newPassword, Integer userId);
+
+    @Query(nativeQuery = true, value = "select * from USERS where " +
+            "USER_NAME like %:query% or " +
+            "FIRST_NAME like %:query% or " +
+            "LAST_NAME like %:query%;")
+    List<User> getUsersByQuery(@Param("query") String query);
 }

@@ -6,6 +6,7 @@ import com.hus23.assignment.socialmediaplatform.pojo.UserAndPostsVO;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -83,6 +84,18 @@ public class UserService {
         }
         details.setPosts(postsRepository.getPostsByUserId(userId));
         return details;
+    }
+
+    public List<User> getUsers(String query){
+        try{
+            List<User> users = userRepository.getUsersByQuery(query);
+            for(int i=0;i<users.size();++i){
+                users.get(i).setPass(null);
+            }
+            return users;
+        }catch(Exception e){
+            throw e;
+        }
     }
 
 }
