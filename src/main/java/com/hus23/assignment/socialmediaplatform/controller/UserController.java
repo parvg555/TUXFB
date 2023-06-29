@@ -40,7 +40,7 @@ public class UserController {
         return new ResponseEntity<>("user updated!", HttpStatus.CREATED);
     }
 
-    @PostMapping("/updatePassword/{userId}")
+    @PutMapping("/updatePassword/{userId}")
     public ResponseEntity<?> updatePassword(@RequestBody PasswordChangeVO passwordChangeVO, @PathVariable("userId") Integer userId){
         String message = "";
         try{
@@ -48,7 +48,7 @@ public class UserController {
         }catch(Exception e){
             return new ResponseEntity<>("Bad request!", HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(message, HttpStatus.CREATED);
+        return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
 }

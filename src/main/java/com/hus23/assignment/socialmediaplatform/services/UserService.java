@@ -43,9 +43,13 @@ public class UserService {
             if(!Objects.equals(passwordChangeVO.getConfirmPassword(), passwordChangeVO.getPassword())){
                 return "password and confirm password does not match!";
             }
-            User user = userRepository.getById((long)userId);
-            if(!Objects.equals(user.getPass(), passwordChangeVO.getOldPassword())){
-                return "old password incorrect!";
+            try {
+                User user = userRepository.getById((long) userId);
+                if(!Objects.equals(user.getPass(), passwordChangeVO.getOldPassword())){
+                    return "old password incorrect!";
+                }
+            }catch(Exception e){
+                return "invalid user id";
             }
             userRepository.updatePassword(passwordChangeVO.getPassword(), userId);
         }catch(Exception e){
