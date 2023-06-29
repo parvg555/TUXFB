@@ -33,11 +33,14 @@ public class PostService {
 
     public void updatePost(PostVO postVO, Integer postId){
         try {
-            System.out.println(postId);
             postsRepository.updatePostById(postVO.getContent(), postVO.getLocation(), postId);
         }catch(Exception e){
             throw e;
         }
+    }
+
+    public void deletePost(Integer postId){
+        postsRepository.deleteById((long) postId);
     }
 
 
