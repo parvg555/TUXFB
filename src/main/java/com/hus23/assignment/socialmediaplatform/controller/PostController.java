@@ -63,5 +63,16 @@ public class PostController {
         }
     }
 
+    @DeleteMapping("/deleteAllPosts/{userId}")
+    public ResponseEntity<?> deleteAllPostsByUserId(@PathVariable("userId") Integer userId){
+        try{
+            postService.deleteAllPostsByUserId(userId);
+            return new ResponseEntity<>("Posts Deleted!", HttpStatus.CREATED);
+        }catch(Exception e){
+            System.out.println(e);
+            return new ResponseEntity<>("Invalid PostId!", HttpStatus.BAD_REQUEST);
+        }
+    }
+
 
 }

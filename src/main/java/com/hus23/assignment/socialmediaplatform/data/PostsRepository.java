@@ -30,4 +30,9 @@ public interface PostsRepository extends JpaRepository<Posts, Long> {
             @Param("postId") Integer postId
     );
 
+    @Modifying
+    @Transactional
+    @Query(nativeQuery = true, value = "delete from POSTS where user_id = :userId ;")
+    void deleteAllPostsByUserId(Integer userId);
+
 }

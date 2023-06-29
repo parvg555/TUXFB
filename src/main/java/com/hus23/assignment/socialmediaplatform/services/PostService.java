@@ -43,5 +43,12 @@ public class PostService {
         postsRepository.deleteById((long) postId);
     }
 
+    public void deleteAllPostsByUserId(Integer userId){
+        try{
+            postsRepository.deleteAllPostsByUserId(userId);
+        }catch (Exception e){
+            throw e;
+        }
+    }
 
 }
