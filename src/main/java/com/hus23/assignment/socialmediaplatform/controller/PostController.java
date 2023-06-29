@@ -70,15 +70,19 @@ public class PostController {
             postService.deleteAllPostsByUserId(userId);
             return new ResponseEntity<>("Posts Deleted!", HttpStatus.CREATED);
         }catch(Exception e){
-            System.out.println(e);
             return new ResponseEntity<>("Invalid PostId!", HttpStatus.BAD_REQUEST);
         }
     }
 
-//    @PostMapping("/comment/{postId}")
-//    public ResponseEntity<?> comment(@RequestBody CommentVO commentVO,  @PathVariable("postId") Integer postId){
-//
-//    }
+    @PostMapping("/comment/{postId}")
+    public ResponseEntity<?> comment(@RequestBody CommentVO commentVO,  @PathVariable("postId") Integer postId){
+        try{
+            postService.comment(commentVO,postId);
+            return new ResponseEntity<>("Comment posted!", HttpStatus.CREATED);
+        }catch(Exception e){
+            return new ResponseEntity<>("Bad Request!", HttpStatus.BAD_REQUEST);
+        }
+    }
 
 
 }

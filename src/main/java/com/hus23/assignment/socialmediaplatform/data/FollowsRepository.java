@@ -27,4 +27,9 @@ public interface FollowsRepository extends JpaRepository<Follows, Long> {
     )
     List<Integer> getFollowing(Integer userId);
 
+    @Query(nativeQuery = true,
+        value="select following_id from follows where follower_id = :user1 and following_id = :user2 ;"
+    )
+    List<Integer> isMyFollower(long user1, long user2);
+
 }

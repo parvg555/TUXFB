@@ -1,11 +1,9 @@
 package com.hus23.assignment.socialmediaplatform.data;
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
-
 @Entity
 @Table(name="comments")
-public class comments {
+public class Comments {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,13 +14,6 @@ public class comments {
     private long post_id;
     @Column(name = "content")
     private String content;
-
-    public comments(long id, long user_id, long post_id, String content) {
-        this.id = id;
-        this.user_id = user_id;
-        this.post_id = post_id;
-        this.content = content;
-    }
 
     public long getId() {
         return id;
