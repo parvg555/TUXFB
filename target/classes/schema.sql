@@ -1,9 +1,9 @@
 CREATE TABLE USERS(
     id bigserial primary key,
-    user_name varchar(20) not null,
+    user_name varchar(20) not null unique,
 --    display_name varchar(255) NOT NULL,
     last_name varchar(20) not null,
-    email varchar(20) NOT NULL,
+    email varchar(20) NOT NULL unique,
     password varchar(20) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     first_name varchar(20) NOT NULL
