@@ -73,16 +73,30 @@ public class PostService {
         }
     }
 
-    public String editComment(CommentVO commentVO, Integer postId){
+    public String editComment(CommentVO commentVO, Integer commentId){
         try{
-            Comments comment = commentsRepository.getById((long) postId);
+            Comments comment = commentsRepository.getById((long) commentId);
             if(comment.getUser_id() == commentVO.getUser_id()){
-                commentsRepository.updateComment(commentVO.getContent(),postId);
+                commentsRepository.updateComment(commentVO.getContent(),commentId);
                 return "comment updated!";
             }else{
                 return "not your comment!";
             }
         }catch(Exception e){
+            throw e;
+        }
+    }
+
+    public String deleteComment(Integer commentId, Integer userId){
+        try{
+            Comments comment = commentsRepository.getById((long) commentId);
+            Posts post = postsRepository.getById(comment.getPost_id());
+            if(comment.getUser_id() == userId || post.getUser_id() == userId){
+                commentsRepository.deleteById((long) commentId);
+                return "comment deleted!";
+            }
+            return "not allowed";
+        }catch (Exception e){
             throw e;
         }
     }

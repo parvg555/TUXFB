@@ -87,9 +87,19 @@ public class PostController {
     @PostMapping("/editComment/{postId}")
     public ResponseEntity<?> editComment(@RequestBody CommentVO commentVO, @PathVariable("postId") Integer postId){
         try{
-            postService.editComment(commentVO,postId);
-            return new ResponseEntity<>("Comment Edited!", HttpStatus.OK);
+            String message = postService.editComment(commentVO,postId);
+            return new ResponseEntity<>(message, HttpStatus.OK);
         }catch(Exception e){
+            return new ResponseEntity<>("Bad Request!", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/deleteComment/{commentId}/{userId}")
+    public ResponseEntity<?> deleteComment(@PathVariable("commentId") Integer commentId, @PathVariable("userId") Integer userId){
+        try{
+            String message = postService.deleteComment(commentId,userId);
+            return new ResponseEntity<>(message, HttpStatus.OK);
+        }catch (Exception e){
             return new ResponseEntity<>("Bad Request!", HttpStatus.BAD_REQUEST);
         }
     }
