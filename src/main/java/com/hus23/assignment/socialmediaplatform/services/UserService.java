@@ -1,11 +1,13 @@
 package com.hus23.assignment.socialmediaplatform.services;
 
 import com.hus23.assignment.socialmediaplatform.data.*;
+import com.hus23.assignment.socialmediaplatform.pojo.FollowersFollowingVO;
 import com.hus23.assignment.socialmediaplatform.pojo.PasswordChangeVO;
 import com.hus23.assignment.socialmediaplatform.pojo.UserAndPostsVO;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -123,5 +125,36 @@ public class UserService {
             throw e;
         }
     }
+
+    public FollowersFollowingVO getFollowersAndFollowing(Integer userId){
+        try{
+            FollowersFollowingVO followersFollowingVO = new FollowersFollowingVO();
+            List<Integer> followers = followsRepository.getFollowers(userId);
+            List<User> followersAsUser = new ArrayList<>();
+            for(Integer followerId:followers){
+                User followerUser = userRepository.getById((long) followerId);
+                if(followerUser!=null){
+                    followersAsUser.add(followerUser);
+                }
+            }
+
+            List<Integer> following = followsRepository.getFollowing(userId);
+            List<User> followingAsUser = new ArrayList<>();
+            for(Integer followerId:following){
+                User followerUser = userRepository.getById((long) followerId);
+                if(followerUser!=null){
+                    followingAsUser.add(followerUser);
+                }
+            }
+
+            followersFollowingVO.setFollowers(followersAsUser);
+            followersFollowingVO.setFollowing(followingAsUser);
+            return followersFollowingVO;
+        }catch(Exception e){
+            System.out.println(e);
+            throw e;
+        }
+    }
+
 
 }

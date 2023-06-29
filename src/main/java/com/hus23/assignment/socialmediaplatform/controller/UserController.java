@@ -1,6 +1,7 @@
 package com.hus23.assignment.socialmediaplatform.controller;
 
 import com.hus23.assignment.socialmediaplatform.data.User;
+import com.hus23.assignment.socialmediaplatform.pojo.FollowersFollowingVO;
 import com.hus23.assignment.socialmediaplatform.pojo.PasswordChangeVO;
 import com.hus23.assignment.socialmediaplatform.pojo.UserAndPostsVO;
 import com.hus23.assignment.socialmediaplatform.services.UserService;
@@ -103,6 +104,16 @@ public class UserController {
                 return new ResponseEntity<>("You cannot unfollow yourself!", HttpStatus.OK);
             }
         }catch(Exception e){
+            return new ResponseEntity<>("Bad request!", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/getFollowersAndFollowing/{userId}")
+    public ResponseEntity<?> getFollowersAndFollowing(@PathVariable("userId") Integer userId){
+        try{
+            FollowersFollowingVO followersFollowingVO = userService.getFollowersAndFollowing(userId);
+            return new ResponseEntity<>(followersFollowingVO, HttpStatus.OK);
+        }catch (Exception e){
             return new ResponseEntity<>("Bad request!", HttpStatus.BAD_REQUEST);
         }
     }
