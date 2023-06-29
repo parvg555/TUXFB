@@ -41,5 +41,16 @@ public class PostController {
         }
     }
 
+    @PostMapping("/updatePost/{postId}")
+    public ResponseEntity<?> updatePost(@RequestBody PostVO postVO, @PathVariable("postId") Integer postId){
+        try{
+            postService.updatePost(postVO,postId);
+            return new ResponseEntity<>("Post updated!", HttpStatus.CREATED);
+        }catch(Exception e){
+            System.out.println(e);
+            return new ResponseEntity<>("Invalid PostId!", HttpStatus.BAD_REQUEST);
+        }
+    }
+
 
 }

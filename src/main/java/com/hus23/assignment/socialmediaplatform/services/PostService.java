@@ -31,5 +31,14 @@ public class PostService {
         postsRepository.save(newPost);
     }
 
+    public void updatePost(PostVO postVO, Integer postId){
+        try {
+            System.out.println(postId);
+            postsRepository.updatePostById(postVO.getContent(), postVO.getLocation(), postId);
+        }catch(Exception e){
+            throw e;
+        }
+    }
+
 
 }
