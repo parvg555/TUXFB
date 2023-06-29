@@ -73,6 +73,20 @@ public class PostService {
         }
     }
 
+    public String editComment(CommentVO commentVO, Integer postId){
+        try{
+            Comments comment = commentsRepository.getById((long) postId);
+            if(comment.getUser_id() == commentVO.getUser_id()){
+                commentsRepository.updateComment(commentVO.getContent(),postId);
+                return "comment updated!";
+            }else{
+                return "not your comment!";
+            }
+        }catch(Exception e){
+            throw e;
+        }
+    }
+
     public boolean isFollowerOrFollowing(long user1, long user2){
         List<Integer> check1 = followsRepository.isMyFollower(user1,user2);
         if(check1.size() > 0) return true;

@@ -84,5 +84,15 @@ public class PostController {
         }
     }
 
+    @PostMapping("/editComment/{postId}")
+    public ResponseEntity<?> editComment(@RequestBody CommentVO commentVO, @PathVariable("postId") Integer postId){
+        try{
+            postService.editComment(commentVO,postId);
+            return new ResponseEntity<>("Comment Edited!", HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<>("Bad Request!", HttpStatus.BAD_REQUEST);
+        }
+    }
+
 
 }
