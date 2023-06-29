@@ -18,21 +18,13 @@ public class Posts {
     @Column(name = "location")
     private String location;
 
-    public String getCreatedat() {
-        return createdat;
-    }
-
-    public void setCreatedat(String createdat) {
-        this.createdat = createdat;
-    }
-
     @Column(name = "created_at")
-    private String createdat;
+    private LocalDateTime createdat;
 
     public Posts() {
     }
 
-    public Posts(long id, long user_id, String content, String location, String createdat) {
+    public Posts(long id, long user_id, String content, String location, LocalDateTime createdat) {
         this.id = id;
         this.user_id = user_id;
         this.content = content;
@@ -40,7 +32,13 @@ public class Posts {
         this.createdat = createdat;
     }
 
+    public LocalDateTime getCreatedat() {
+        return createdat;
+    }
 
+    public void setCreatedat(LocalDateTime createdat) {
+        this.createdat = createdat;
+    }
 
     public long getId() {
         return id;
