@@ -2,6 +2,7 @@ package com.hus23.assignment.socialmediaplatform.controller;
 
 import com.hus23.assignment.socialmediaplatform.data.User;
 import com.hus23.assignment.socialmediaplatform.pojo.PasswordChangeVO;
+import com.hus23.assignment.socialmediaplatform.pojo.UserAndPostsVO;
 import com.hus23.assignment.socialmediaplatform.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -55,6 +56,17 @@ public class UserController {
     public ResponseEntity<?> deleteUser(@PathVariable("userId") Integer userId){
         userService.deleteUser(userId);
         return new ResponseEntity<>("User deleted!", HttpStatus.OK);
+    }
+
+    @GetMapping("/getDetails/{userId}")
+    public ResponseEntity<?> getDetails(@PathVariable("userId") Integer userId){
+        UserAndPostsVO details = null;
+        try{
+            details = userService.getDetails(userId);
+        }catch(Exception e){
+            return new ResponseEntity<>("Bad request!", HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(details, HttpStatus.OK);
     }
 
 }

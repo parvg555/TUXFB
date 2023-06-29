@@ -2,6 +2,7 @@ package com.hus23.assignment.socialmediaplatform.services;
 
 import com.hus23.assignment.socialmediaplatform.data.*;
 import com.hus23.assignment.socialmediaplatform.pojo.PasswordChangeVO;
+import com.hus23.assignment.socialmediaplatform.pojo.UserAndPostsVO;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -12,8 +13,11 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public UserService( UserRepository userRepository) {
+    private final PostsRepository postsRepository;
+
+    public UserService( UserRepository userRepository, PostsRepository postsRepository) {
         this.userRepository = userRepository;
+        this.postsRepository= postsRepository;
     }
     public User addUser(User guest) {
         User guest1 = new User();
@@ -60,6 +64,25 @@ public class UserService {
 
     public void deleteUser(Integer userId){
         userRepository.deleteById((long) userId);
+    }
+
+    public UserAndPostsVO getDetails(Integer userId){
+        UserAndPostsVO details = new UserAndPostsVO();
+        User userDetails = new User();
+        try{
+            User user = userRepository.getById((long) userId);
+            userDetails.setId(user.getId());
+            userDetails.setUsername(user.getUsername());
+            userDetails.setFirstName(user.getFirstName());
+            userDetails.setLastName(user.getLastName());
+            userDetails.setCreatedat(user.getCreatedat());
+            userDetails.setEmailAddress(user.getEmailAddress());
+            details.setUser(userDetails);
+        }catch (Exception e){
+            throw e;
+        }
+        details.setPosts(postsRepository.getPostsByUserId(userId));
+        return details;
     }
 
 }
