@@ -58,6 +58,8 @@ public class UserService {
         return "Password Updated!";
     }
 
-
+    public void deleteUser(Integer userId){
+        userRepository.deleteById((long) userId);
+    }
 
 }
