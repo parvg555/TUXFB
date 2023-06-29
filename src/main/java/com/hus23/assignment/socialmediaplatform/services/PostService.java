@@ -2,6 +2,7 @@ package com.hus23.assignment.socialmediaplatform.services;
 
 import com.hus23.assignment.socialmediaplatform.data.Posts;
 import com.hus23.assignment.socialmediaplatform.data.PostsRepository;
+import com.hus23.assignment.socialmediaplatform.pojo.CommentVO;
 import com.hus23.assignment.socialmediaplatform.pojo.PostVO;
 import org.springframework.stereotype.Service;
 
@@ -50,5 +51,13 @@ public class PostService {
             throw e;
         }
     }
+
+//    public void comment(CommentVO commentVO, Integer postId){
+//        try{
+//
+//        }catch(Exception e){
+//            throw e;
+//        }
+//    }
 
 }

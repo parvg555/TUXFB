@@ -79,4 +79,32 @@ public class UserController {
         }
     }
 
+    @PostMapping("/follow/{idToBeFollowed}")
+    public ResponseEntity<?> follow(@RequestBody String userId, @PathVariable("idToBeFollowed") Integer idToBeFollowed){
+        try{
+            if(Integer.parseInt(userId) != idToBeFollowed) {
+                userService.follow(Integer.parseInt(userId), idToBeFollowed);
+                return new ResponseEntity<>("Follow Success!", HttpStatus.OK);
+            }else{
+                return new ResponseEntity<>("You cannot follow yourself!", HttpStatus.OK);
+            }
+        }catch(Exception e){
+            return new ResponseEntity<>("Bad request!", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PostMapping("/unfollow/{idToBeUnFollowed}")
+    public ResponseEntity<?> unFollow(@RequestBody String userId, @PathVariable("idToBeUnFollowed") Integer idToBeUnFollowed){
+        try{
+            if(Integer.parseInt(userId) != idToBeUnFollowed) {
+                userService.unFollow(Integer.parseInt(userId), idToBeUnFollowed);
+                return new ResponseEntity<>("unfollow Success!", HttpStatus.OK);
+            }else{
+                return new ResponseEntity<>("You cannot unfollow yourself!", HttpStatus.OK);
+            }
+        }catch(Exception e){
+            return new ResponseEntity<>("Bad request!", HttpStatus.BAD_REQUEST);
+        }
+    }
+
 }

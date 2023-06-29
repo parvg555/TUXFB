@@ -2,6 +2,7 @@ package com.hus23.assignment.socialmediaplatform.controller;
 
 import com.hus23.assignment.socialmediaplatform.data.Posts;
 import com.hus23.assignment.socialmediaplatform.data.User;
+import com.hus23.assignment.socialmediaplatform.pojo.CommentVO;
 import com.hus23.assignment.socialmediaplatform.pojo.PostVO;
 import com.hus23.assignment.socialmediaplatform.services.PostService;
 import org.springframework.http.HttpStatus;
@@ -73,6 +74,11 @@ public class PostController {
             return new ResponseEntity<>("Invalid PostId!", HttpStatus.BAD_REQUEST);
         }
     }
+
+//    @PostMapping("/comment/{postId}")
+//    public ResponseEntity<?> comment(@RequestBody CommentVO commentVO,  @PathVariable("postId") Integer postId){
+//
+//    }
 
 
 }

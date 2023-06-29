@@ -16,9 +16,16 @@ public class UserService {
 
     private final PostsRepository postsRepository;
 
-    public UserService( UserRepository userRepository, PostsRepository postsRepository) {
+    private final FollowsRepository followsRepository;
+
+    public UserService(
+            UserRepository userRepository,
+            PostsRepository postsRepository,
+            FollowsRepository followsRepository
+    ) {
         this.userRepository = userRepository;
         this.postsRepository= postsRepository;
+        this.followsRepository = followsRepository;
     }
     public User addUser(User guest) {
         User guest1 = new User();
@@ -93,6 +100,25 @@ public class UserService {
                 users.get(i).setPass(null);
             }
             return users;
+        }catch(Exception e){
+            throw e;
+        }
+    }
+
+    public void follow(Integer followerId, Integer followingId){
+        try{
+            Follows follows = new Follows();
+            follows.setFollower_id(followerId);
+            follows.setFollowing_id(followingId);
+            followsRepository.save(follows);
+        }catch(Exception e){
+            throw e;
+        }
+    }
+
+    public void unFollow(Integer followerId, Integer followingId){
+        try{
+            followsRepository.unfollow(followerId,followingId);
         }catch(Exception e){
             throw e;
         }
