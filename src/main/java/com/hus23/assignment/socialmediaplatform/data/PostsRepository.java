@@ -12,4 +12,8 @@ public interface PostsRepository extends JpaRepository<Posts, Long> {
     @Query(nativeQuery = true, value = "select * from posts where user_id = :userId order by created_at asc;")
     List<Posts> getPostsByUserId(Integer userId);
 
+    @Query(nativeQuery = true, value = "select * from posts where location = :location order by created_at asc;")
+    List<Posts> getPostsByLocation(String location);
+
+
 }
