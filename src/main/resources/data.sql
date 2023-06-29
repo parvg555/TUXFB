@@ -1,7 +1,8 @@
-INSERT INTO USERS (user_name,last_name,email,password,created_at,first_name) VALUES ('AbhinaySingh','Singh','abhinays@gmail.com','Bhai@123',current_timestamp,'Abhinay');
-INSERT INTO USERS (user_name,last_name,email,password,created_at,first_name) VALUES ('akanksha','singh','akanksha@gmail.com','hihi@123',current_timestamp,'akkku');
-INSERT INTO USERS (user_name,last_name,email,password,created_at,first_name) VALUES ('AshimaPal','Pal','ashimas@gmail.com','CRY@123',current_timestamp,'ashipal');
-INSERT INTO USERS (user_name,last_name,email,password,created_at,first_name) VALUES ('AlmariSingh','Singh','jcb@gmail.com','khdaai@123',current_timestamp,'Allu');
+INSERT INTO USERS (user_name,last_name,email,password,created_at,first_name) VALUES ('a','a','a@gmail.com','a',current_timestamp,'a');
+INSERT INTO USERS (user_name,last_name,email,password,created_at,first_name) VALUES ('b','b','b@gmail.com','b',current_timestamp,'b');
+INSERT INTO USERS (user_name,last_name,email,password,created_at,first_name) VALUES ('c','c','c@gmail.com','c',current_timestamp,'c');
+INSERT INTO USERS (user_name,last_name,email,password,created_at,first_name) VALUES ('d','d','d@gmail.com','d',current_timestamp,'d');
+
 INSERT INTO posts (user_id, content, location, created_at)
 VALUES (1, 'Hello, world!', 'New York',current_timestamp),
        (2, 'This is a sample post.', 'London',current_timestamp),

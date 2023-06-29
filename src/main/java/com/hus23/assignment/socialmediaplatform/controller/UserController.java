@@ -19,34 +19,14 @@ public class UserController {
         this.userService = userService;
     }
     @PostMapping("/addUser")
-    public ResponseEntity getGuests(@RequestBody User user){
-
-        // model.addAttribute("guests", this.reservationService.getHotelGuests());
-        // return "hotel-guests";
-        this.userService.addUser(user);
-        return ResponseEntity.ok().build();
-    }
-    @DeleteMapping("/DelUser/{userId}")
-    public  ResponseEntity deleteCourse(@PathVariable String userId)
-    {
-         this.userService.deleteUser(Long.parseLong(userId));
-         return ResponseEntity.ok().build();
-    }
-    @GetMapping("/user")
-    public ResponseEntity<?>getallUsers(Model model){
-        //model.addAttribute("guests", this.reservationService.getHotelGuests());
-        // return "hotel-guests";
-        System.out.println("calling User controller");
-        return new ResponseEntity<>(this.userService.getUsers(), HttpStatus.OK);
-    }
-    @GetMapping("/LoggedInUserDetails/{userID}")
-    public ResponseEntity<?>LoggedInUserDetails(@PathVariable String userID)
-    {
-
-        //model.addAttribute("guests", this.reservationService.getHotelGuests());
-        // return "hotel-guests";
-        System.out.println("calling User controller");
-        return new ResponseEntity<>(this.userService.loginuserdetails(Long.parseLong(userID)), HttpStatus.OK);
+    public ResponseEntity<?> addUser(@RequestBody User user){
+        User createdUser = new User();
+        try {
+            createdUser = this.userService.addUser(user);
+        }catch(Exception e){
+            return new ResponseEntity<>("username or email already exists", HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     }
 
 }
